@@ -37,13 +37,17 @@
 	( t (weight-inc(first(last(first(first htree))))) htree)))
 
 (defun weight-inc (weight htree)
-  (cons(htree(last(weight)))) (htree-weight(rest(first
+  (cons(htree(last(weight)))) (htree-weight(rest(first))))
 			 
 
 (defun htree-less (htree1 htree2)
-  (if ( < (first(last(first(first htree1)))) (first(last(first(first htree2))))) (htree1))
-	( t (htree2))) 
-						    
+  (cond ((null htree1) (not (null htree2)))
+	((null htree2) nil)
+	(( = (first(last(first(first htree1)))) (first(last(first(first htree2)))) (htree-less (first htree1))))
+											      (rest(first htree2)))))))
+	(t ( < (first(last(first(first htree1)))) (first(last(first(first htree2))))))))
+						   
+			    
 
 (defun htree-symbols (htree)
   (first(last(first(first htree))))
@@ -52,7 +56,7 @@
   )
 
 (defun htree-sort (htrees)
-  )
+  (sort (copy-seq htrees) #'htree-less)))
 
 (defun make-huffman-tree (mess)
   (freqlist mess))
