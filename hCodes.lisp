@@ -41,8 +41,8 @@
 			 
 
 (defun htree-less (htree1 htree2)
-  (if ((first(last(first(first htree1)))) < (first(last(first(first htree2))))) (first(last(first(first htree1)))))
-	( t (first(last(first(first htree2))))))) 
+  (if ( < (first(last(first(first htree1)))) (first(last(first(first htree2))))) (htree1))
+	( t (htree2))) 
 						    
 
 (defun htree-symbols (htree)
