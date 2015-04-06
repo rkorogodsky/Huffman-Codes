@@ -52,8 +52,8 @@
   (htree-merge (first htrees) (rest htrees)))
 
 (defun htree-merge (htree1 htree2)
-  (cond ((and(eql nil htree1) (eql nil htree2)) 0)
-  (t (list(list(list(first(first htree1)) (first(first(first htree2)))) ( + (first(last htree1)) (first(last(first htree2)))))(htree-merge (rest htree1) (rest htree2))))))
+  (cond ((NULL htree1) 0) ((NULL htree2) 0)
+  (t (list(list(list(first(first htree1)) (first(first(first htree2)))) ( + (first(last htree1)) (first(last(first htree2)))))(htree-merge htree1 (rest htree2))))))
 
 
 (defun leaf-p (htree)
