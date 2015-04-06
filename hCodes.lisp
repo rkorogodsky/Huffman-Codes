@@ -11,11 +11,6 @@
               no hello goodbye no is goodbye no yes when
     ))
 
-(defconstant htreeTest
-  '(
-     (((NO) 23) ((YES) 17) ((NOT) 9) ((IS) 10) ((HELLO) 5) 0)
-    ))
-
 (defun htree-symbols (mess)
   (htree-freq mess nil))
 
@@ -25,10 +20,10 @@
 
 (defun update (weight freq-list)
   (cond ((endp freq-list) (list(list(list weight) 1)))
-	((freq-equal weight (first(first freq-list))) (cons (incpair(first freq-lisy))(rest freq-list)))
+	((freq-equal weight (first(first freq-list))) (cons (incpair(first freq-list))(rest freq-list)))
 	( t (cons (first freq-list)(update weight (rest freq-list))))))
 
-(defun freq-equal (weight p) (equal w (first p)))
+(defun freq-equal (weight p) (equal weight (first p)))
 
 (defun incpair (p) (list (first p)(1+ (second p))))
 
@@ -41,45 +36,34 @@
 			 
 
 (defun htree-less (htree1 htree2)
-  (cond ((null htree1) (not (null htree2)))
-	((null htree2) nil)
-	(( = (first(last(first(first htree1)))) (first(last(first(first htree2)))) (htree-less (first htree1))))
-											      (rest(first htree2)))))))
-	(t ( < (first(last(first(first htree1)))) (first(last(first(first htree2))))))))
-						   
-			    
+  (cond ((< (first(last htree1)) (first(last htree2))))))
 
-(defun htree-symbols (htree)
-  (first(last(first(first htree))))
 
 (defun root (htree)
   )
 
 (defun htree-sort (htrees)
-  (sort (copy-seq htrees) #'htree-less)))
+  (sort (copy-seq htrees) #'htree-less))
 
 (defun make-huffman-tree (mess)
-  (freqlist mess))
+  (htree-sort(htree-symbols mess)))
+  
+(defun start-merge (htrees)
+  (htree-merge (first htrees) (rest htrees)))
 
-(defun htree-merge (htree1) (htree2)
-       (assert(not(null branches)))
-       (if(null(rest branches))
-	  (first branches)
-	  (htree-merge (htree-sort
-			(cons (htree-merge (first branches)
-					   (second branches)
-					   (rest (rest branches))))))))
+(defun htree-merge (htree1 htree2)
+  (cond ((and(eql nil htree1) (eql nil htree2)) 0)
+  (t (list(list(list(first(first htree1)) (first(first(first htree2)))) ( + (first(last htree1)) (first(last(first htree2)))))(htree-merge (rest htree1) (rest htree2))))))
+
 
 (defun leaf-p (htree)
-  )
+  (cond ((= (length (first htree)) 1))))
 
 (defun left-subhtree (htree)
-  (first htree)
-  )
+  (first htree))
 
 (defun right-subhtree (htree)
-  (last htree)
-  )
+  (last htree))
 
 
 
