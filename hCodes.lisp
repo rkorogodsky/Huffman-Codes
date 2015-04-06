@@ -1,13 +1,6 @@
-;;; HERE IS A NON-ABSTRACTED AND UNDOCUMENTED VERSION OF HOW TO MAKE THE INITIAL 
-;;; FREQUESCY LIST.  DO NOT USE THIS CODE AS-IS AS IT IS NOT ABSTRACTED.  HOWEVER,
-;;; YOU MIGHT FIND THE CODE USEFUL TO LOOK AT.
-
-
-
-;;;  GENERATE THE FREQUENCY LIST FROM THE MESSAGE
-
-
-;; This code is deliberately written without comments and "fairly badly" so as not to make it too clear.
+;;; Program written by Royce Korogodsky
+;;; Huffman Codes
+;;; CSC 345
 
 (defconstant message 
   '(
@@ -20,30 +13,73 @@
 
 (defconstant htreeTest
   '(
-     ((((NO) 23) ((YES) 17) ((NOT) 9) ((IS) 10) ((HELLO) 5)))
+     (((NO) 23) ((YES) 17) ((NOT) 9) ((IS) 10) ((HELLO) 5) 0)
     ))
 
-(Defun freqlist (mess)
-  (fl mess nil))
+(defun htree-symbols (mess)
+  (htree-freq mess nil))
 
-(defun fl (m pfl)
-  (cond ((endp m) pfl)
-	(t (fl (rest m)(update (first m) pfl)))))
+(defun htree-freq (mess pfl)
+  (cond ((endp mess) pfl)
+	(t (htree-freq (rest mess)(update (first mess) pfl)))))
 
-(defun update (w fl)
-  (cond ((endp fl) (list(list(list w) 1)))
-	((fequal w (first(first fl))) (cons (incpair(first fl))(rest fl)))
-	( t (cons (first fl)(update w (rest fl))))))
+(defun update (weight freq-list)
+  (cond ((endp freq-list) (list(list(list weight) 1)))
+	((freq-equal weight (first(first freq-list))) (cons (incpair(first freq-lisy))(rest freq-list)))
+	( t (cons (first freq-list)(update weight (rest freq-list))))))
 
-(defun fequal (w p) (equal w (first p)))
+(defun freq-equal (weight p) (equal w (first p)))
 
 (defun incpair (p) (list (first p)(1+ (second p))))
 
 (defun htree-weight (htree)
   (cond ((endp htree) 0)
-	( t (+  (first (last(first(first(first htree))))) (first(last(last(first(last(rest(first(first htree))))))))
+	( t (weight-inc(first(last(first(first htree))))) htree)))
+
+(defun weight-inc (weight htree)
+  (cons(htree(last(weight)))) (htree-weight(rest(first
+			 
 
 (defun htree-less (htree1 htree2)
+  (if ((first(last(first(first htree1)))) < (first(last(first(first htree2))))) (first(last(first(first htree1)))))
+	( t (first(last(first(first htree2))))))) 
+						    
+
+(defun htree-symbols (htree)
+  (first(last(first(first htree))))
+
+(defun root (htree)
+  )
+
+(defun htree-sort (htrees)
+  )
+
+(defun make-huffman-tree (mess)
+  (freqlist mess))
+
+(defun htree-merge (htree1) (htree2)
+       (assert(not(null branches)))
+       (if(null(rest branches))
+	  (first branches)
+	  (htree-merge (htree-sort
+			(cons (htree-merge (first branches)
+					   (second branches)
+					   (rest (rest branches))))))))
+
+(defun leaf-p (htree)
+  )
+
+(defun left-subhtree (htree)
+  (first htree)
+  )
+
+(defun right-subhtree (htree)
+  (last htree)
+  )
+
+
+
+		
   
 
 
